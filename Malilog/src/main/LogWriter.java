@@ -4,11 +4,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class LogWriter {
 
-	private String path = "../Logs/logs.log";
-	private BufferedWriter bw;
+	private String path = "Logs/logs.log";
+	private PrintWriter writer;
 	private static LogWriter logwriter;
 
 	private LogWriter() {
@@ -21,8 +22,7 @@ public class LogWriter {
 			if (!file.exists())
 				file.createNewFile();
 
-			FileWriter fw = new FileWriter(file);
-			bw = new BufferedWriter(fw);
+			writer = new PrintWriter(new BufferedWriter(new FileWriter(path, true)));
 
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -37,20 +37,13 @@ public class LogWriter {
 	}
 
 	public void close() {
-		try {
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		writer.close();
 	}
 
 	public void write(String log) {
-		try {
-			System.out.println("log: " + log);
-			bw.write(log);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println("log: " + log);
+		writer.println(log);
+		writer.flush();
 	}
 
 }
