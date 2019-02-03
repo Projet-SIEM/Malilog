@@ -19,13 +19,15 @@ public class LogWriter {
 	private void createWriter() {
 		try {
 			File file = new File(path);
-			if (!file.exists())
-				file.createNewFile();
+			String tmp[] = path.split(File.separator);
+			if (tmp.length > 1) {
+				file.getParentFile().mkdirs(); // Create parents
+			}
 
 			writer = new PrintWriter(new BufferedWriter(new FileWriter(path, true)));
 
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -41,9 +43,12 @@ public class LogWriter {
 	}
 
 	public void write(String log) {
-		System.out.println("log: " + log);
 		writer.println(log);
 		writer.flush();
+	}
+
+	public String getPath() {
+		return path;
 	}
 
 }
