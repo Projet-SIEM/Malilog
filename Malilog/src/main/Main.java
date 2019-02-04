@@ -1,5 +1,7 @@
 package main;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -35,6 +37,10 @@ public class Main {
 		while (!(check || stop)) { // Manual or automatic stop
 			try {
 				Thread.sleep(ThreadLocalRandom.current().nextInt(100, 1000));
+				String srcIP = new RandomIPGen().getRandomIp();
+				logwriter.writeInline(srcIP);
+				LocalDateTime date = LocalDateTime.now();
+				logwriter.writeInline(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 				logwriter.write("test-" + cpt);
 				check = (number != -1 ? stop && (cpt < number) : stop);
 
