@@ -114,7 +114,7 @@ public class Main {
 						cmd = sc.nextLine();
 						cmd = cmd.toLowerCase();
 
-//			If we add more commands
+						// If we add more commands
 						switch (cmd) {
 						case "exit":
 							validCmd = true;
