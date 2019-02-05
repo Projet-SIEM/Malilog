@@ -1,7 +1,5 @@
 package main;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,7 +21,7 @@ public class Main {
 	private static boolean generationEnded = false;
 	private static boolean noInteraction = false;
 
-	private static void generation(LogWriter logwriter) {
+	private static void generation(LogWriter logwriter, Generator generator) {
 		int cpt = 0;
 		boolean check = stop;
 		System.out.println("Starting log generation ...");
@@ -37,13 +35,10 @@ public class Main {
 		while (!(check || stop)) { // Manual or automatic stop
 			try {
 				Thread.sleep(ThreadLocalRandom.current().nextInt(100, 1000));
-				String srcIP = new RandomIPGen().getRandomIp();
-				logwriter.writeInline(srcIP);
-				LocalDateTime date = LocalDateTime.now();
-				logwriter.writeInline(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-				logwriter.write("test-" + cpt);
-				check = (number != -1 ? stop && (cpt < number) : stop);
 
+				generator.generateLog(logwriter);
+
+				check = (number != -1 ? stop && (cpt < number) : stop);
 				if (number != -1) { // Infinite number until manual stop
 					check = cpt >= number;
 				} else {
@@ -97,10 +92,11 @@ public class Main {
 			}
 
 			LogWriter logwriter = LogWriter.getLogWriter();
+			Generator generator = Generator.getGenerator();
 
 			Thread t1 = new Thread() {
 				public void run() {
-					generation(logwriter);
+					generation(logwriter, generator);
 				}
 			};
 			t1.start();

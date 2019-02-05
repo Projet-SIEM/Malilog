@@ -42,11 +42,6 @@ public class LogWriter {
 		writer.close();
 	}
 
-	public void writeInline(String log) {
-		writer.print(log + " ");
-		writer.flush();
-	}
-
 	public void write(String log) {
 		writer.println(log);
 		writer.flush();
