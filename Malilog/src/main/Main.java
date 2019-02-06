@@ -38,12 +38,12 @@ public class Main {
 
 				generator.generateLog(logwriter);
 
-				check = (number != -1 ? stop && (cpt < number) : stop);
-				if (number != -1) { // Infinite number until manual stop
-					check = cpt >= number;
-				} else {
-					check = stop;
-				}
+				check = (number > 0 ? (cpt >= number - 1) : stop);
+//				if (number != -1) { // Infinite number until manual stop
+//					check = cpt >= number;
+//				} else {
+//					check = stop;
+//				}
 				cpt++;
 
 			} catch (InterruptedException e) {
