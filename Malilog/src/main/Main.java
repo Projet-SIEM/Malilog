@@ -132,7 +132,6 @@ public class Main {
 					}
 				}
 			}
-			logwriter.close();
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			formatter.printHelp("java -jar malilog.jar [options]", options);

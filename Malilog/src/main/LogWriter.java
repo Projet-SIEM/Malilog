@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.regex.Pattern;
 
 public class LogWriter {
 
@@ -37,6 +36,7 @@ public class LogWriter {
 	 * Close the writer
 	 */
 	public void close() {
+//		writer.flush();
 		writer.close();
 	}
 
@@ -45,10 +45,9 @@ public class LogWriter {
 	 */
 	private void createWriter() {
 		try {
-			System.out.println("Path: " + path);
 			File file = new File(path);
-			String tmp[] = path.split(Pattern.quote(path));
-			if (tmp.length > 1) {
+
+			if (!file.exists()) {
 				file.getParentFile().mkdirs(); // Create parents
 			}
 
