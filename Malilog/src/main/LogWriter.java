@@ -5,21 +5,49 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Pattern;
 
 public class LogWriter {
 
-	private String path = "Logs/logs.log";
-	private PrintWriter writer;
 	private static LogWriter logwriter;
 
+	/**
+	 * Return the LogWriter instance
+	 * 
+	 * @return
+	 */
+	public static LogWriter getLogWriter() {
+		if (LogWriter.logwriter == null)
+			LogWriter.logwriter = new LogWriter();
+
+		return logwriter;
+	}
+
+	private String path = "Logs" + File.separator + "logs.log";
+	private PrintWriter writer;
+
+	/**
+	 * constructor
+	 */
 	private LogWriter() {
 		createWriter();
 	}
 
+	/*
+	 * Close the writer
+	 */
+	public void close() {
+		writer.close();
+	}
+
+	/**
+	 * Initialize the writer and open the file
+	 */
 	private void createWriter() {
 		try {
+			System.out.println("Path: " + path);
 			File file = new File(path);
-			String tmp[] = path.split(File.separator);
+			String tmp[] = path.split(path);
 			if (tmp.length > 1) {
 				file.getParentFile().mkdirs(); // Create parents
 			}
@@ -31,24 +59,23 @@ public class LogWriter {
 		}
 	}
 
-	public static LogWriter getLogWriter() {
-		if (LogWriter.logwriter == null)
-			LogWriter.logwriter = new LogWriter();
-
-		return logwriter;
+	/**
+	 * Return the file's path
+	 * 
+	 * @return
+	 */
+	public String getPath() {
+		return path;
 	}
 
-	public void close() {
-		writer.close();
-	}
-
+	/**
+	 * Write in file
+	 * 
+	 * @param log The string to write
+	 */
 	public void write(String log) {
 		writer.println(log);
 		writer.flush();
-	}
-
-	public String getPath() {
-		return path;
 	}
 
 }

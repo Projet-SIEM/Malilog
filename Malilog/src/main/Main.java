@@ -21,13 +21,19 @@ public class Main {
 	private static boolean generationEnded = false;
 	private static boolean noInteraction = false;
 
+	/**
+	 * Loop of auto log generation
+	 * 
+	 * @param logwriter
+	 * @param generator
+	 */
 	private static void generation(LogWriter logwriter, Generator generator) {
 		int cpt = 0;
 		boolean check = stop;
 		System.out.println("Starting log generation ...");
 
 		if (!noInteraction) {
-			System.out.println("Enter \"exit\" to stop the generation:");
+			System.out.println("Enter \"exit\" to stop the generation.");
 		} else {
 			System.out.println("No interaction enabled. Press Ctrl+C to stop.");
 		}
@@ -39,11 +45,6 @@ public class Main {
 				generator.generateLog(logwriter);
 
 				check = (number > 0 ? (cpt >= number - 1) : stop);
-//				if (number != -1) { // Infinite number until manual stop
-//					check = cpt >= number;
-//				} else {
-//					check = stop;
-//				}
 				cpt++;
 
 			} catch (InterruptedException e) {
@@ -52,9 +53,6 @@ public class Main {
 		}
 		System.out.println(cpt + " logs have been generated in \"" + logwriter.getPath() + "\".");
 		generationEnded = true;
-		if (number != -1) {
-			System.out.println("Press Enter to continue...");
-		}
 	}
 
 	public static void main(String[] args) {
@@ -134,6 +132,7 @@ public class Main {
 					}
 				}
 			}
+			logwriter.close();
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			formatter.printHelp("java -jar malilog.jar [options]", options);

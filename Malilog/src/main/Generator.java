@@ -13,14 +13,25 @@ public class Generator {
 
 	private static Generator generator;
 
+	public static Generator getGenerator() {
+		if (Generator.generator == null)
+			Generator.generator = new Generator();
+
+		return generator;
+	}
+
 	private List<String> protocols;
 	private int protoSize = 0;
-	private int maxProtoSize = 0;
 
+	private int maxProtoSize = 0;
 	private List<String> data;
 	private int dataSize = 0;
+
 	private int maxDataSize = 0;
 
+	/**
+	 * Constructor
+	 */
 	private Generator() {
 		try {
 			protocols = Files.readAllLines(Paths.get("configs/protocols.txt"));
@@ -52,53 +63,6 @@ public class Generator {
 			System.err.println("Default value used: Default message for logs");
 		}
 
-	}
-
-	public static Generator getGenerator() {
-		if (Generator.generator == null)
-			Generator.generator = new Generator();
-
-		return generator;
-	}
-
-	public String getRandomIp() {
-		int b1 = getRandomNumber(0, 223);
-		int b2 = getRandomNumber(0, 255);
-		int b3 = getRandomNumber(0, 255);
-		int b4 = getRandomNumber(0, 255);
-
-		return b1 + "." + b2 + "." + b3 + "." + b4;
-	}
-
-	private int getRandomNumber(int min, int max) {
-
-		Random r = new Random();
-		return min >= max ? 0 : r.nextInt(max - min) + min;
-	}
-
-	private String getRandomProtocol() {
-		return protocols.get(getRandomNumber(0, protoSize));
-	}
-
-	private String getRandomData() {
-		return data.get(getRandomNumber(0, dataSize));
-	}
-
-	private String getDate() {
-		LocalDateTime date = LocalDateTime.now();
-		return "[" + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "]";
-	}
-
-	private String getRandomTransport() {
-		return getRandomNumber(0, 2) == 0 ? "TCP" : "UDP";
-	}
-
-	private String padding(int size) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < size; i++) {
-			sb.append(" ");
-		}
-		return sb.toString();
 	}
 
 	/**
@@ -178,5 +142,82 @@ public class Generator {
 		sb.append(padding((maxDataSize + 1) - dat.length()));
 
 		logwriter.write(sb.toString());
+	}
+
+	/**
+	 * Return the current date time
+	 * 
+	 * @return
+	 */
+	private String getDate() {
+		LocalDateTime date = LocalDateTime.now();
+		return "[" + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "]";
+	}
+
+	/**
+	 * Return a random line from data.txt
+	 * 
+	 * @return
+	 */
+	private String getRandomData() {
+		return data.get(getRandomNumber(0, dataSize));
+	}
+
+	/**
+	 * Return a random IP address
+	 * 
+	 * @return
+	 */
+	public String getRandomIp() {
+		int b1 = getRandomNumber(0, 223);
+		int b2 = getRandomNumber(0, 255);
+		int b3 = getRandomNumber(0, 255);
+		int b4 = getRandomNumber(0, 255);
+
+		return b1 + "." + b2 + "." + b3 + "." + b4;
+	}
+
+	/**
+	 * Return a random number between max and min
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	private int getRandomNumber(int min, int max) {
+		Random r = new Random();
+		return min >= max ? 0 : r.nextInt(max - min) + min;
+	}
+
+	/**
+	 * Return a random protocol from protocols.txt
+	 * 
+	 * @return
+	 */
+	private String getRandomProtocol() {
+		return protocols.get(getRandomNumber(0, protoSize));
+	}
+
+	/**
+	 * Return either TCP or UDP randomly
+	 * 
+	 * @return
+	 */
+	private String getRandomTransport() {
+		return getRandomNumber(0, 2) == 0 ? "TCP" : "UDP";
+	}
+
+	/**
+	 * Pretty printer, get a string with "size" space
+	 * 
+	 * @param size
+	 * @return
+	 */
+	private String padding(int size) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < size; i++) {
+			sb.append(" ");
+		}
+		return sb.toString();
 	}
 }
