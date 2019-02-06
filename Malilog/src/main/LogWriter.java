@@ -47,7 +47,7 @@ public class LogWriter {
 		try {
 			System.out.println("Path: " + path);
 			File file = new File(path);
-			String tmp[] = path.split(path);
+			String tmp[] = path.split(Pattern.quote(path));
 			if (tmp.length > 1) {
 				file.getParentFile().mkdirs(); // Create parents
 			}
