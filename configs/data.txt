@@ -4,5 +4,4 @@ Connection to server
 failed to access server
 hackerman
 jean-cleaude is mispelled
-ports open
-all your bases are belong to us
+All ports have been scanned
