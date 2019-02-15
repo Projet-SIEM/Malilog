@@ -5,3 +5,8 @@ failed to access server
 hackerman
 jean-cleaude is mispelled
 All ports have been scanned
+authentication failure
+check pass; user unknown
+Message warning: Mail system is down -- accessing queue directly
+A web attack returned code 200 (success)
+File system full
