@@ -40,7 +40,7 @@ public class Main {
 
 		while (!(check || stop)) { // Manual or automatic stop
 			try {
-				Thread.sleep(ThreadLocalRandom.current().nextInt(100, 1000));
+				Thread.sleep(ThreadLocalRandom.current().nextInt(0, 200));
 
 				generator.generateLog(logwriter);
 
