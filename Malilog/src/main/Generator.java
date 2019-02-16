@@ -67,7 +67,7 @@ public class Generator {
 
 	/**
 	 * NetFlow modified style date - protocol - ip source - ip destination - port
-	 * source - port destination - type of service - interface - data
+	 * source - port destination - data
 	 * 
 	 * @param logwriter
 	 * @return The formatted log
@@ -130,12 +130,6 @@ public class Generator {
 
 		sb.append(portDest); // port destination
 		sb.append(padding(6 - padD));
-
-//		sb.append(getRandomService()); // type of service ?
-//		sb.append(" ");
-
-//		sb.append(getRandomInterface()); // interface ?
-//		sb.append(" ");
 
 		String dat = getRandomData();
 		sb.append(dat); // Data

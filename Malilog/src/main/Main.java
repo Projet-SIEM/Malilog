@@ -40,7 +40,12 @@ public class Main {
 
 		while (!(check || stop)) { // Manual or automatic stop
 			try {
-				Thread.sleep(ThreadLocalRandom.current().nextInt(0, 200));
+				if (number == -1) {
+					Thread.sleep(ThreadLocalRandom.current().nextInt(100, 1000)); // Random Waiting to simulate real
+																					// logs input when Malilog in
+																					// automatic mode (No number of logs
+																					// specified)
+				}
 
 				generator.generateLog(logwriter);
 
