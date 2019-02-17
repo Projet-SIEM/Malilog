@@ -1,12 +1,15 @@
 hack
-HACK
 Connection to server
 failed to access server
 hackerman
-jean-cleaude is mispelled
 All ports have been scanned
 authentication failure
 check pass; user unknown
 Message warning: Mail system is down -- accessing queue directly
 A web attack returned code 200 (success)
 File system full
+Intel(R) 82579LM Gigabit Network Connection Network link has been established at 100Mbps full duplex.
+Configuration Credential Guard (LsaIso.exe) : 0x0, 0
+NIC C8372F23-A278-4432-83E1-B772FDB2380B (Friendly Name: nat) successfully connected to port B8E464EB-FB67-4AC9-9CF9-81A4A9F6CCC6 (Friendly Name: Container NIC 3dc0cae8) on switch 9271FA72-D0E1-49C2-968A-5BA1E8DE2122(Friendly Name: nat).
+Microsoft (R) Windows (R) 10.00. 17134  Multiprocessor Free.
+S3 time of the firmware. ResumeCount : 1, FullResume : 420, AverageResume : 420
