@@ -38,7 +38,7 @@ public class Main {
 		boolean check = stop;
 		ProgressBar pg = new ProgressBar();
 
-		if (number != 1) {
+		if (noInteraction) {
 			pg.setMax(number);
 		}
 
@@ -100,6 +100,7 @@ public class Main {
 
 			if (cm.hasOption("nb")) {
 				number = Integer.parseInt(cm.getOptionValue("nb"));
+				noInteraction = true;
 			}
 
 			if (cm.hasOption("ni")) {
