@@ -6,6 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * LogWriter class to ease the logs writing
+ * 
+ * @author alemasle
+ *
+ */
 public class LogWriter {
 
 	private static LogWriter logwriter;

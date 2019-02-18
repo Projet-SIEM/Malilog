@@ -11,6 +11,12 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+/**
+ * Main class
+ * 
+ * @author alemasle
+ *
+ */
 public class Main {
 
 	/**
@@ -30,6 +36,12 @@ public class Main {
 	private static void generation(LogWriter logwriter, Generator generator) {
 		int cpt = 0;
 		boolean check = stop;
+		ProgressBar pg = new ProgressBar();
+
+		if (number != 1) {
+			pg.setMax(number);
+		}
+
 		System.out.println("Starting log generation ...");
 
 		if (!noInteraction && number == -1) {
@@ -48,12 +60,16 @@ public class Main {
 				check = (number > 0 ? (cpt >= number - 1) : stop);
 				cpt++;
 
+				pg.printBar(cpt); // Progress Bar
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		System.out.print("\n");
 		System.out.println(cpt + " logs have been generated in \"" + logwriter.getPath() + "\".");
 		generationEnded = true;
+
 	}
 
 	public static void main(String[] args) {

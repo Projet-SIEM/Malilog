@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Generator class used as a Log generator
+ * @author alemasle
+ *
+ */
 public class Generator {
 
 	private static Generator generator;
