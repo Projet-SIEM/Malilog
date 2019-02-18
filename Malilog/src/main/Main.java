@@ -32,7 +32,7 @@ public class Main {
 		boolean check = stop;
 		System.out.println("Starting log generation ...");
 
-		if (!noInteraction) {
+		if (!noInteraction && number == -1) {
 			System.out.println("Enter \"exit\" to stop the generation.");
 		} else {
 			System.out.println("No interaction enabled. Press Ctrl+C to stop.");
