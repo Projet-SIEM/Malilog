@@ -36,11 +36,11 @@ public class Main {
 	private static void generation(LogWriter logwriter, Generator generator) {
 		int cpt = 0;
 		boolean check = stop;
-		ProgressBar pg = new ProgressBar();
+//		ProgressBar pg = new ProgressBar();
 
-		if (noInteraction) {
-			pg.setMax(number);
-		}
+//		if (noInteraction) {
+//			pg.setMax(number);
+//		}
 
 		System.out.println("Starting log generation ...");
 
@@ -60,7 +60,7 @@ public class Main {
 				check = (number > 0 ? (cpt >= number - 1) : stop);
 				cpt++;
 
-				pg.printBar(cpt); // Progress Bar
+//				pg.printBar(cpt); // Progress Bar
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
