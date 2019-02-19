@@ -26,6 +26,17 @@ public class Main {
 	private static int number = -1;
 	private static boolean generationEnded = false;
 	private static boolean noInteraction = false;
+	private static boolean noProgression = false;
+	private static ProgressBar pg = new ProgressBar();
+
+	private static void progress(int value) {
+		if (!noProgression && noInteraction && number != -1) {
+			if (pg.getMax() == -1) {
+				pg.setMax(number);
+			}
+			pg.printBar(value); // Progress Bar
+		}
+	}
 
 	/**
 	 * Loop of auto log generation
@@ -36,11 +47,6 @@ public class Main {
 	private static void generation(LogWriter logwriter, Generator generator) {
 		int cpt = 0;
 		boolean check = stop;
-//		ProgressBar pg = new ProgressBar();
-
-//		if (noInteraction) {
-//			pg.setMax(number);
-//		}
 
 		System.out.println("Starting log generation ...");
 
@@ -60,7 +66,7 @@ public class Main {
 				check = (number > 0 ? (cpt >= number - 1) : stop);
 				cpt++;
 
-//				pg.printBar(cpt); // Progress Bar
+				progress(cpt); // Progress Bar
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -86,6 +92,9 @@ public class Main {
 				"Run without interactive mode (Can not stop with \"exit\", must use Ctrl+C)");
 		options.addOption(noInteract);
 
+		Option noBar = new Option("nbar", "no-progress-bar", false, "Run without Progress Bar");
+		options.addOption(noBar);
+
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter formatter = new HelpFormatter();
 		CommandLine cm;
@@ -105,6 +114,10 @@ public class Main {
 
 			if (cm.hasOption("ni")) {
 				noInteraction = true;
+			}
+
+			if (cm.hasOption("nbar")) {
+				noProgression = true;
 			}
 
 			LogWriter logwriter = LogWriter.getLogWriter();
